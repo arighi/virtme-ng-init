@@ -213,7 +213,24 @@ fn poweroff() {
 }
 
 fn configure_environment() {
-    env::set_var("PATH", "/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin");
+    let paths = [
+        "/sbin",
+        "/bin",
+        "/usr/sbin",
+        "/usr/bin",
+        "/usr/local/sbin",
+        "/usr/local/bin",
+        "/snap/virtme-ng/current/sbin",
+        "/snap/virtme-ng/current/bin",
+        "/snap/virtme-ng/current/usr/sbin",
+        "/snap/virtme-ng/current/usr/bin",
+    ];
+    let path_str: String = paths
+        .iter()
+        .map(|&path| path.to_string())
+        .collect::<Vec<String>>()
+        .join(":");
+    env::set_var("PATH", &path_str);
 }
 
 fn get_kernel_version(show_machine: bool) -> String {
