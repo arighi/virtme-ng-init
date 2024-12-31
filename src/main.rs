@@ -315,7 +315,7 @@ fn generate_shadow() -> io::Result<()> {
 
     for line in reader.lines() {
         if let Some((username, _)) = line?.split_once(':') {
-            writeln!(writer, "{}:!:::::::", username)?;
+            writeln!(writer, "{}::::::::", username)?;
         }
     }
     utils::do_mount(
